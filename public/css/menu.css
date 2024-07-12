@@ -1,0 +1,85 @@
+:root {
+    --orange: rgb(255, 123, 0);
+}
+* {
+    font-family: "Nunito Sans", sans-serif;
+}
+
+.bg-orange {
+    background-color: var(--orange);
+}
+
+.btn-orange {
+    background-color: var(--orange);
+    border: 3px solid rgb(255, 111, 0);
+    font-weight: bold;
+    color: white;
+    text-align: center;
+}
+.btn-orange:hover {
+    color: white;
+    background-color: rgb(247, 139, 39);
+}
+
+.content-wrapper {
+    display: flex;
+}
+
+#content {
+    margin-left: 15%;
+}
+
+.side {
+    position: fixed;
+    width: 15%;
+    top: 0;
+    bottom: 0;
+    background-color: rgb(69, 153, 0);
+}
+
+.key-points h1 {
+    color: rgb(69, 153, 0);
+    font-size: 5rem;
+    font-weight: bold;
+}
+
+.types h1 {
+    font-size: 4rem;
+    font-weight: bold;
+}
+
+.question-wrapper {
+    width: 60%;
+    margin: 0 auto 0 auto;
+}
+
+.answer-box {
+    height: 100px;
+}
+
+.question-footer {
+    padding-top: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap-reverse;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+}
+
+/* Listening */
+#listeningBtn {
+    margin: auto;
+    width: 8rem;
+    aspect-ratio: 4/4;
+    border-radius: 50%;
+}
+
+#listeningBtn:hover {
+    color: white;
+    background-color: rgb(247, 139, 39);
+}
+#listeningBtn img {
+    width: 80%;
+}
+/* End Listening */
