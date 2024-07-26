@@ -19,7 +19,7 @@ Speak the answer to the question you hear
     <p class="text-muted text-center my-3">Number of replays left : 2</p>
     <audio src="{{ asset('audio/test.mp3') }}" id="listeningAudio" controls hidden></audio>
 
-    <form action="/exam/store" id="myform" enctype="multipart/form-data" method="post">
+    <form action="/exam" id="myform" enctype="multipart/form-data" method="post">
         @csrf
         <input type="hidden" name="question_id" value="2">
         <input type="hidden" name="test_id" value="{{ $dataTest->id }}">

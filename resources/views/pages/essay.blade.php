@@ -14,7 +14,7 @@ Respon to the question in at least 50 words
     <div class="col-md-6">
         <p>A university plans to develop a new research center in your country. Some people want a center for business research, while others want a center for research in agriculture (farming). Which of these two kinds of research centers would you recommend, and why?</p>
     </div>
-    <form action="/exam/store" method="post" class="col-md-6" id="myform">
+    <form action="/exam" method="post" class="col-md-6" id="myform">
         @csrf
         <input type="hidden" name="question_id" value="1" >
         <input type="hidden" name="test_id" value="{{ $dataTest->id }}" >

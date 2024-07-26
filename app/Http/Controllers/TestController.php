@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Test;
 use App\Models\TestDetail;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 
 class TestController extends Controller
 {

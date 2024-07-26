@@ -35,9 +35,12 @@ Route::middleware('auth')->group(function() {
         return view('pages.dashboard');
     });
     
-    Route::get('/exam', [TestController::class, 'exam']);
+    Route::post('/exam', [TestController::class, 'exam']);
     Route::get('/exam/online', [TestController::class, 'examOnline']);
-    Route::post('/exam/store', [TestDetailController::class, 'answerStore']);
+    Route::post('/exam', [TestDetailController::class, 'answerStore']);
+
+    Route::get('/speech-to-text', [TestDetailController::class, 'speechToTextIndex']);
+    Route::post('/speech-to-text', [TestDetailController::class, 'speechToText']);
 });
 
 // Route::post('/', function(Request $request) 

@@ -8,7 +8,10 @@
   </head>
   <body class="d-flex justify-content-center align-items-center" style="height: 100vh">
 
+
     <a href="/exam" class="btn btn-primary fs-2 px-5 rounded-1 shadow-lg">Mulai Ujian</a>
+
+    <a href="/speech-to-text" class="btn btn-primary fs-2 px-5 rounded-1 shadow-lg ms-3">Speech to Text</a>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   </body>

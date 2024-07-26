@@ -1,35 +1,51 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Timer Ujian</title>
-</head>
-<body>
-    <div id="timer"></div>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bicara AI | Speech To Text</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  </head>
+  <body class="d-flex justify-content-center align-items-center" style="height: 100vh">
 
-    <script>
-        // Atur waktu akhir ujian dari server
-        let endTime = new Date("{{ $end_time }}").getTime();
+    <div class="bg-dark-subtle shadow-lg p-4 rounded rounded-4 text-center">
+      <form action="/speech-to-text" method="post" enctype="multipart/form-data" class="text-center" id="myForm">
+        @csrf
+        <input type="hidden" name="response" id="audioFile">
+      </form>
+            {{-- AUDIO CONTROL --}}
+            <audio id="recorder" muted hidden></audio>
+            <audio id="player" controls></audio>
+            {{-- AUDIO BUTTON --}}
+            <div class="mt-3">
+              <button id="start" class="btn-orange rounded py-1 px-2">Start Record</button>
+              <button id="stop" class="btn-orange rounded py-1 px-2 d-none">Stop Recording</button>
+            </div>
+        {{-- <form action="/speech-to-text" method="post" enctype="multipart/form-data" class="text-center">
+            @csrf
+            <input type="file" name="file" class="d-block form-control" >
+            <button class="btn btn-secondary shadow mt-3 fw-semibold">Generate</button>
+        </form> --}}
+    </div>
+
+    <div class="bg-light shadow-lg w-50 h-25 ms-5 border border-3 rounded rounded-4 p-3 overflow-y-scroll">
+
+        @if(session()->has('response'))
+            {{-- @dd(session('response')->content() ) --}}
+            @php
+                $data = json_decode(session('response')->content(), true);
+                
+                $data = json_decode($data["response"], true)
+            @endphp
+
+            @isset ($data['text'])
+              <p>{{ $data['text'] }}</p>
+            @endisset
+        @endif
         
-        let x = setInterval(function() {
-            let now = new Date().getTime();
-            let distance = endTime - now;
-            console.log(distance);
-
-            let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            let seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            document.getElementById("timer").innerHTML = hours + ": "
-            + minutes + ": " + seconds + " ";
-
-            if (distance < 0) {
-                clearInterval(x);
-                document.getElementById("timer").innerHTML = "Waktu ujian telah berakhir.";
-                // Mungkin tambahkan logika di sini setelah waktu ujian berakhir
-            }
-        }, 1000);
-    </script>
-</body>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="{{ asset('js/audio-recorder.js') }}"></script>
+  </body>
 </html>

@@ -21,7 +21,7 @@ Speak your answer to the question below
         </ul>
     </div>
 
-    <form action="/exam/store" id="myform" enctype="multipart/form-data" method="post">
+    <form action="/exam" id="myform" enctype="multipart/form-data" method="post">
         @csrf
         <input type="hidden" name="question_id" value="2">
         <input type="hidden" name="test_id" value="{{ $dataTest->id }}">

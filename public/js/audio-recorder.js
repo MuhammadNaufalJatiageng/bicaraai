@@ -1,5 +1,6 @@
 function sendVoiceNote(base64) {
     document.querySelector("#audioFile").value = base64;
+    document.getElementById("myForm").submit();
 }
 
 class VoiceRecorder {
@@ -54,7 +55,7 @@ class VoiceRecorder {
     }
 
     onMediaRecorderStop(e) {
-        const blob = new Blob(this.chunks, { type: "audio/wav" });
+        const blob = new Blob(this.chunks, { type: "audio/mp3" });
         const audioURL = window.URL.createObjectURL(blob);
         this.playerRef.src = audioURL;
         this.getAudioStream(blob);
@@ -94,7 +95,7 @@ class VoiceRecorder {
 
             // get only base64 data
             base64 = base64.split(",")[1];
-
+            console.log(base64);
             // send base64 to server to save
             sendVoiceNote(base64);
         };
