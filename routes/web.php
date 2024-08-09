@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PythonController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\TestDetailController;
 use App\Models\Test;
@@ -9,6 +10,9 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
+
+use Symfony\Component\Process\Exception\ProcessFailedException;
+use Symfony\Component\Process\Process;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,7 +44,7 @@ Route::middleware('auth')->group(function() {
     Route::post('/exam', [TestDetailController::class, 'answerStore']);
 
     Route::get('/speech-to-text', [TestDetailController::class, 'speechToTextIndex']);
-    Route::post('/speech-to-text', [TestDetailController::class, 'speechToText']);
+    Route::post('/speech-to-text', [TestDetailController::class, 'stt']);
 });
 
 // Route::post('/', function(Request $request) 
@@ -88,3 +92,16 @@ Route::middleware('auth')->group(function() {
 //     //     ]);
 //     // }
 // }); 
+
+Route::get('/test', function() {
+
+    $pythonScriptPath = base_path('/python/example.py'); // Replace with the path to your Python script
+
+    $command = "python $pythonScriptPath"; // Use `python` if appropriate
+
+    $output = shell_exec($command);
+    $result = json_decode($output, true);
+
+    return response()->json($result);
+
+});

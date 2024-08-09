@@ -69,6 +69,36 @@ class TestDetailController extends Controller
         }
     }
 
+    public function stt(Request $request)
+    {
+        $base64 = $request->response;
+        $file_name = "audio/" . time() . ".mp3";
+        file_put_contents(public_path($file_name), base64_decode($base64));
+
+        $file = "audio/" . time() .".wav";
+
+        $this->convertMp3ToWav(public_path($file_name), $file);
+        File::delete(public_path($file_name));
+        
+        $audioFilePath = public_path($file);
+        $pythonScriptPath = base_path('/python/app.py');
+
+        $command = "python $pythonScriptPath $audioFilePath"; // Use `python` if appropriate
+
+        $output = shell_exec($command);
+        $result = json_decode($output, true);
+
+        File::delete(public_path($file));
+        
+        if ($result) {
+            if ($result['status'] === "success") {
+                return back()->with('response', response()->json($result));
+            }
+        }
+        
+        return response()->json($result);
+    }
+
     public function answerStore(Request $request)
     {
         

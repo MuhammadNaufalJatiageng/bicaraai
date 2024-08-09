@@ -31,7 +31,16 @@
     <div class="bg-light shadow-lg w-50 h-25 ms-5 border border-3 rounded rounded-4 p-3 overflow-y-scroll">
 
         @if(session()->has('response'))
-            {{-- @dd(session('response')->content() ) --}}
+          @php
+              $data = json_decode(session('response')->content(), true);
+          @endphp
+
+          @isset ($data['text'])
+            <p>{{ $data['text'] }}</p>
+          @endisset
+        @endif
+        {{-- @if(session()->has('response'))
+            @dd(session('response')->content() )
             @php
                 $data = json_decode(session('response')->content(), true);
                 
@@ -41,7 +50,7 @@
             @isset ($data['text'])
               <p>{{ $data['text'] }}</p>
             @endisset
-        @endif
+        @endif --}}
         
     </div>
     
